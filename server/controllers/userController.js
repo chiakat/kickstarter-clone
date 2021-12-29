@@ -1,72 +1,95 @@
-const db = require('../models');
-const {
-  getUserQuery, createUserQuery, updateUserQuery,
-} = require('./userQueries');
+const db = require('../db');
 
 module.exports = {
   // adds new user
   createUser: (req, res) => {
-    console.log('called', req.body);
-    db.query(createUserQuery, Object.values(req.body))
-      .then(data => {
-        res.status(200).send(data);
-
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message
+    const createUserQuery = `INSERT INTO users
+      (auth_id, username, email)
+      VALUES ($1, $2, $3)`;
+    db.query(createUserQuery, Object.values(req.body), (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        console.log(data);
+        res.status(201).json({
+          status: "success",
+          data: {
+            project: data.rows[0],
+          },
         });
-      });
+      }
+    });
   },
 
   // selects one user
   getUser: (req, res) => {
-    const { auth_id } = req.body;
-      db.query(getUserQuery, Object.values(req.body), (insertErr) => {
-        if (insertErr) {
-          res.status(500).send(insertErr);
-        } else {
-          res.status(200).send(false);
-        }
-      });
+    db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data.rows);
+      }
+    });
   },
+
 
   // updates a user
   updateUser: (req, res) => {
-    const { auth_id } = req.body;
-      db.query(updateUserQuery, Object.values(req.body), (insertErr) => {
-        if (insertErr) {
-          res.status(500).send(insertErr);
-        } else {
-          res.status(200).send(false);
-        }
-      });
-  },
-
-  // checks if user exists in table. If not, add new user and return false. If so, return subscribed
-  postUser: (req, res) => {
-    const { auth_id } = req.body;
-    db.query(selectStatus, [auth_id], (statusErr, statusData) => {
-      if (statusErr) {
-        res.status(500).send(statusErr);
-      } else if (!statusData.rows[0].exists) {
-        db.query(insertNewUser, Object.values(req.body), (insertErr) => {
-          if (insertErr) {
-            res.status(500).send(insertErr);
-          } else {
-            res.status(200).send(false);
-          }
-        });
+    const updateUserQuery = `UPDATE users
+      SET (
+        first_name,
+        last_name,
+        cardholder_name,
+        card_number,
+        card_exp_date,
+        billing_address1,
+        billing_address2,
+        billing_city,
+        billing_state,
+        billing_postal_code,
+        billing_country
+      ) = (
+        $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      WHERE auth_id = $1`;
+      const values = [req.params.id, ...Object.values(req.body)];
+    db.query(updateUserQuery, values, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
       } else {
-        db.query(selectSubscribed, [auth_id], (subscribedErr, subscribedData) => {
-          if (subscribedErr) {
-            res.status(500).send(subscribedErr);
-          } else {
-            res.status(200).send(subscribedData.rows[0].subscribed);
-          }
+        res.status(200).json({
+          status: 'success',
+          data: {
+            project: data.rows[0],
+          },
         });
       }
     });
-  }
+  },
+
+
+  // // checks if user exists in table. If not, add new user and return false. If so, return subscribed
+  // postUser: (req, res) => {
+  //   const { auth_id } = req.body;
+  //   db.query(selectStatus, [auth_id], (statusErr, statusData) => {
+  //     if (statusErr) {
+  //       res.status(500).send(statusErr);
+  //     } else if (!statusData.rows[0].exists) {
+  //       db.query(insertNewUser, Object.values(req.body), (err) => {
+  //         if (err) {
+  //           res.status(500).send(err);
+  //         } else {
+  //           res.status(200).send(false);
+  //         }
+  //       });
+  //     } else {
+  //       db.query(selectSubscribed, [auth_id], (subscribedErr, subscribedData) => {
+  //         if (subscribedErr) {
+  //           res.status(500).send(subscribedErr);
+  //         } else {
+  //           res.status(200).send(subscribedData.rows[0].subscribed);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 };
