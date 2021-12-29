@@ -3,44 +3,27 @@ const db = require('../db');
 module.exports = {
   // adds new project
   createProject: (req, res) => {
+    console.log('create', req);
     const createProjectQuery = `INSERT INTO projects
-      (title, tagline, description, funding, deadline, auth_id)
+      (title, tagline, description, funding, deadline, user_id)
       VALUES ($1, $2, $3, $4, $5, $6)`;
-    db.query(createProjectQuery, Object.values(req.body), (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        console.log(data);
-        res.status(201).json({
-          status: "success",
-          data: {
-            project: data.rows[0],
-          },
-        });
-      }
-    });
+    db.query(createProjectQuery, Object.values(req.body))
+      .then(data => res.status(201).send('success: created project'))
+      .catch(err => res.status(500).send(err))
   },
 
   // Get all projects
   getAllProjects: (req, res) => {
-    db.query('SELECT * FROM projects', (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(data.rows);
-      }
-    });
+    db.query('SELECT * FROM projects')
+      .then(data => res.status(200).send(data.rows))
+      .catch(err => res.status(500).send(err))
   },
 
   // selects one project
   getProject: (req, res) => {
-    db.query('SELECT * FROM projects WHERE id = $1', [req.params.id], (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(data.rows);
-      }
-    });
+    db.query('SELECT * FROM projects WHERE id = $1', [req.params.id])
+      .then(data => res.status(200).send(data.rows[0]))
+      .catch(err => res.status(500).send(err))
   },
 
   // updates a project
@@ -52,36 +35,20 @@ module.exports = {
         description,
         funding,
         deadline,
-        auth_id
+        user_id
       ) = (
         $2, $3, $4, $5, $6)
-      WHERE auth_id = $1`;
-    const values = [req.params.id, ...Object.values(req.body)];
-    db.query(updateProjectQuery, values, (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).json({
-          status: 'success',
-          data: {
-            project: data.rows[0],
-          },
-        });
-      }
-    });
+      WHERE user_id = $1`;
+    db.query(updateProjectQuery, [req.params.id, ...Object.values(req.body)])
+      .then(data => res.status(200).send(data.rows[0]))
+      .catch(err => res.status(500).send(err))
   },
 
   // deletes a project
   deleteProject: (req, res) => {
-    db.query('DELETE FROM projects where id = $1', req.params.id, (err) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(204).json({
-          status: 'success',
-        });
-      }
-    });
+    db.query('DELETE FROM projects where id = $1', [req.params.id])
+      .then(data => res.status(204).send('success: deleted'))
+      .catch(err => res.status(500).send(err))
   }
 
   // // add project funding

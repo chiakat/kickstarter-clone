@@ -25,7 +25,7 @@ CREATE TABLE projects (
   description VARCHAR(2000),
   funding REAL NOT NULL,
   deadline DATE NOT NULL,
-  auth_id VARCHAR(50) NOT NULL REFERENCES users(auth_id)
+  user_id SERIAL NOT NULL REFERENCES users(id)
 );
 
 DROP TABLE IF EXISTS users_projects;
@@ -33,7 +33,7 @@ CREATE TABLE users_projects (
   id SERIAL NOT NULL PRIMARY KEY,
   user_funding REAL NOT NULL,
   project_id SERIAL NOT NULL REFERENCES projects(id),
-  auth_id VARCHAR(50) NOT NULL REFERENCES users(auth_id)
+  user_id SERIAL NOT NULL REFERENCES users(id)
 );
 
 
