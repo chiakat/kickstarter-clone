@@ -21,12 +21,27 @@ module.exports = {
     });
   },
 
-  // selects one user
-  getUser: (req, res) => {
-    db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, data) => {
+  // Get all users
+  getAllUsers: (req, res) => {
+    db.query('SELECT * FROM users', (err, data) => {
       if (err) {
         res.status(500).send(err);
       } else {
+        res.status(200).send(data.rows);
+      }
+    });
+  },
+
+  // selects one user
+  getUser: async (req, res) => {
+    console.log(req.params.id);
+    const {id} = req.params;
+    await db.query("SELECT * FROM users WHERE id = $1", [1], (err, data) => {
+      if (err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        console.log(data);
         res.status(200).send(data.rows);
       }
     });
