@@ -1,4 +1,4 @@
-import React, { createContext, useState, FC } from 'react';
+import React, { useState, FC } from 'react';
 
 interface ProjectInterface {
   id: number;
@@ -12,21 +12,38 @@ interface ProjectInterface {
 
 interface ProjectsInterface extends Array<ProjectInterface>{}
 
+type selectedProject = ProjectInterface | null;
+// type setSelectedProject =  React.Dispatch<React.SetStateAction<selectedProject>>;
+
 interface ProjectsContextInterface {
-  projects: ProjectsInterface,
-  // setProjects: FC,
-  // addProjects: FC,
-  // selectedProject: ProjectInterface,
-  // setSelectedProject: FC,
+  projects: ProjectInterface | never[],
+  setProjects?: () => void,
+  addProjects?: () => void,
+  selectedProject: ProjectInterface | null,
+  setSelectedProject: React.Dispatch<React.SetStateAction<selectedProject>>,
 }
 
-const defaultState = {projects: []};
+const defaultState = {
+  projects: [],
+  selectedProject: null,
+  setSelectedProject: () => null,
+};
+
+
+
+// type ProjectsContextType = {
+//   projects: ProjectInterface | never[],
+//   setProjects?: (id: number) => void,
+//   addProjects?: (id: number) => void,
+//   selectedProject: selectedProject,
+//   setSelectedProject: setSelectedProject,
+// }
 
 export const ProjectsContext = React.createContext<ProjectsContextInterface>(defaultState);
 
 export const ProjectsProvider: FC = ({children}) => {
   const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectInterface | null>(null);
 
   // const addProjects = (project: ProjectInterface) => {
   //   setProjects([...projects, project]);
@@ -37,8 +54,8 @@ export const ProjectsProvider: FC = ({children}) => {
         projects,
         //setProjects,
         // addProjects,
-        //selectedProject,
-       // setSelectedProject,
+        selectedProject,
+        setSelectedProject,
       }}
     >
       {children}

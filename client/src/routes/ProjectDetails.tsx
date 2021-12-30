@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProjectsContext } from "../context/ProjectsContext";
 import ProjectFinder from "../apis/ProjectFinder";
-import Contributors from '../components/Contributors';
-import Funding from "../components/Funding";
+// import Contributors from '../components/Contributors';
+// import Funding from "../components/Funding";
 import AddFunding from "../components/AddFunding";
 
 const ProjectDetails = () => {
@@ -31,19 +31,19 @@ const ProjectDetails = () => {
       {selectedProject && (
         <>
           <h1>
-            {selectedProject.Project.name}
+            {selectedProject.title}
           </h1>
           <div className="text-center">
-            <Funding funding={selectedProject.Project.total_funding} />
+            {/* <Funding funding={selectedProject.Project.total_funding} />
             <span className="text-warning ml-1">
               {selectedProject.Project.count
                 ? `(${selectedProject.Project.count})`
                 : "(0)"}
-            </span>
+            </span> */}
           </div>
-          <div className="mt-3">
+          {/* <div className="mt-3">
             <Contributors contributors={selectedProject.contributors} />
-          </div>
+          </div> */}
           <AddFunding />
         </>
       )}
