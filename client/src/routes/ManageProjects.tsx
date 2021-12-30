@@ -1,15 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
-import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
 
-function Home() {
+function ManageProjects() {
   return (
     <div>
       <Header />
-      <ProjectForm />
+      <h1>Manage Projects</h1>
+      <ProjectList />
     </div>
   );
 }
 
-export default Home;
+export default ManageProjects;

@@ -3,6 +3,7 @@ import {
   Button, Box, Grid, TextField, Alert,
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
+import ProjectData from '../apis/ProjectData';
 
 export default function ProjectForm() {
   const { selectedProject, setSelectedProject } = useContext(ProjectsContext);
@@ -28,31 +29,25 @@ export default function ProjectForm() {
 
     let response;
     if (action === 'Added') {
-      response = await fetch('/api/projects', {
-        method: 'POST',
-        body: JSON.stringify({
-          title, tagline, description, fundingGoal, deadline, user,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      response = await ProjectData.post('/', {
+        title,
+        tagline,
+        description,
+        funding_goal: fundingGoal,
+        deadline,
+        user,
       });
     } else if (project === null) {
       return setError('No project selected.');
     } else {
-      response = await fetch(`/api/projects/${project.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
+      response = await ProjectData.put(`/${project.id}`, {
+        data: {
           title, tagline, description, fundingGoal, deadline, user,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
         },
       });
     }
 
-    const result = await response.json();
-    const data = action === 'Added' ? result[0] : result;
+    const data = action === 'Added' ? response.data[0] : response.data;
 
     if (data) {
       // reset form for added project
@@ -165,9 +160,8 @@ export default function ProjectForm() {
           >
             <Button
               type="submit"
-                // variant="contained"
               sx={{ my: 3, mr: 2 }}
-              href="/projects/view"
+              href="/projects/manage"
             >
               View All projects
             </Button>

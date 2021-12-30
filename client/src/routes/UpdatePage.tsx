@@ -1,11 +1,11 @@
 import React from 'react';
-import UpdateProject from '../components/UpdateProject';
+import ProjectForm from '../components/ProjectForm';
 
 function UpdatePage() {
   return (
     <div>
       <h1>Update Project</h1>
-      <UpdateProject />
+      <ProjectForm />
     </div>
   );
 }
