@@ -1,52 +1,80 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProjectData from '../apis/ProjectData';
 import { ProjectsContext } from "../context/ProjectsContext";
+import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import { IconButton, Alert, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+
+interface row {
+  id: number;
+}
+
+interface cellValues {
+  row: row
+}
+
 const ProjectList = () => {
-
-  useEffect(() => {
-    try {
-      const response = ProjectData.get('/')
-      console.log(response);
-    } catch (err) {
-      return setError('Unable to find projects');
-    }
-  },[])
-
+  let navigate = useNavigate();
   const { projects, setProjects } = useContext(ProjectsContext);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const updateProject = async (projectId) => router.push(`/projects/${projectId}/update`);
+  useEffect(() => {
+    const getProjectData = async () => {
+      try {
+        const response = await ProjectData.get('/');
+        console.log(response.data)
+        setProjects(response.data.data.projects);
+      } catch (err) {
+        return setError('Unable to find projects');
+      }
+    };
+    getProjectData();
+  }, []);
 
-  const deleteProject = async (projectId) => {
+  const updateProject = (projectId: number) => {
+    navigate(`/projects/${projectId}/update`);
+  };
+
+  const deleteProject = async (projectId: number) => {
     // reset error and message
     setError('');
     setMessage('');
     try {
-      await fetch(`/api/projects/${projectId}`, {
-        method: 'DELETE',
-      });
-      return router.push(router.asPath);
+      await ProjectData.delete(`/${projectId}`);
+      setProjects(
+        projects.filter((project) => {
+          return project.id !== projectId;
+        })
+      );
     } catch (err) {
       return setError('Unable to delete');
     }
   };
 
+  const selectProject = (projectId: number) => {
+    navigate(`/projects/${projectId}`);
+  }
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 80 },
     {
-      field: 'name', headerName: 'project name', flex: 1.8, minWidth: 80,
+      field: 'title', headerName: 'Project Title', flex: 1.8, minWidth: 80,
     },
     {
-      field: 'location', headerName: 'Location', flex: 1.8, minWidth: 80,
+      field: 'tagline', headerName: 'Tagline', flex: 1.8, minWidth: 80,
     },
     {
-      field: 'project', headerName: 'Project', flex: 1, minWidth: 50,
+      field: 'fundingGoal', headerName: 'Funding Goal', flex: 1, minWidth: 50,
+    },
+    {
+      field: 'fundingReceived', headerName: 'Funding Received', flex: 1, minWidth: 50,
+    },
+    {
+      field: 'deadline', headerName: 'Deadline', flex: 1, minWidth: 50,
     },
     {
       field: 'user', headerName: 'User', flex: 1, minWidth: 50,
@@ -54,7 +82,7 @@ const ProjectList = () => {
     {
       field: 'Edit',
       width: 80,
-      renderCell: (cellValues) => (
+      renderCell: (cellValues: cellValues) => (
         <IconButton aria-label="update" color="primary"
         onClick={() => {
           updateProject(cellValues.row.id);
@@ -66,7 +94,7 @@ const ProjectList = () => {
     {
       field: 'Delete',
       width: 80,
-      renderCell: (cellValues) => (
+      renderCell: (cellValues: cellValues) => (
         <IconButton aria-label="delete" color="secondary"
           onClick={() => {
             deleteProject(cellValues.row.id);

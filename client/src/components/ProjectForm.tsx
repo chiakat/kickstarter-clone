@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   Button, Box, Grid, TextField, Alert,
 } from '@mui/material';
+import { ProjectsContext } from "../context/ProjectsContext";
 
-export default function ProjectForm({ project }) {
+export default function ProjectForm() {
+  const { selectedProject, setSelectedProject } = useContext(ProjectsContext);
+  const project = selectedProject;
   const action = project ? 'Updated' : 'Added';
   const [title, setTitle] = useState(project ? project.title : '');
   const [tagline, setTagline] = useState(project ? project.tagline : '');
@@ -15,7 +18,7 @@ export default function ProjectForm({ project }) {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // reset error and message
     setError('');
@@ -34,8 +37,10 @@ export default function ProjectForm({ project }) {
           'Content-Type': 'application/json',
         },
       });
+    } else if (project === null) {
+      return setError('No project selected.');
     } else {
-      response = await fetch(`/api/projects?id=${project.id}`, {
+      response = await fetch(`/api/projects/${project.id}`, {
         method: 'PUT',
         body: JSON.stringify({
           title, tagline, description, fundingGoal, deadline, user,

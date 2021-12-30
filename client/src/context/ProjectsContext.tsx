@@ -6,18 +6,21 @@ interface ProjectInterface {
   tagline: string;
   description: string;
   fundingGoal: number;
+  fundingReceived: number;
   deadline: string;
-  user_id: number;
+  user: number;
 }
 
-interface ProjectsInterface extends Array<ProjectInterface>{}
+// interface ProjectsInterface extends Array<ProjectInterface>{}
 
 type selectedProject = ProjectInterface | null;
+type projects = ProjectInterface[] | never[];
+
 // type setSelectedProject =  React.Dispatch<React.SetStateAction<selectedProject>>;
 
 interface ProjectsContextInterface {
-  projects: ProjectInterface | never[],
-  setProjects?: () => void,
+  projects: ProjectInterface[] | never[],
+  setProjects: React.Dispatch<React.SetStateAction<projects>>,
   addProjects?: () => void,
   selectedProject: ProjectInterface | null,
   setSelectedProject: React.Dispatch<React.SetStateAction<selectedProject>>,
@@ -27,6 +30,7 @@ const defaultState = {
   projects: [],
   selectedProject: null,
   setSelectedProject: () => null,
+  setProjects: () => null,
 };
 
 
@@ -42,7 +46,7 @@ const defaultState = {
 export const ProjectsContext = React.createContext<ProjectsContextInterface>(defaultState);
 
 export const ProjectsProvider: FC = ({children}) => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<projects | never[]>([]);
   const [selectedProject, setSelectedProject] = useState<ProjectInterface | null>(null);
 
   // const addProjects = (project: ProjectInterface) => {
@@ -52,7 +56,7 @@ export const ProjectsProvider: FC = ({children}) => {
     <ProjectsContext.Provider
       value={{
         projects,
-        //setProjects,
+        setProjects,
         // addProjects,
         selectedProject,
         setSelectedProject,
