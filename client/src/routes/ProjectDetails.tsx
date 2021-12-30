@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { ProjectsContext } from "../context/ProjectsContext";
-import ProjectFinder from "../apis/ProjectData";
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { ProjectsContext } from '../context/ProjectsContext';
+import ProjectFinder from '../apis/ProjectData';
 // import Contributors from '../components/Contributors';
 // import Funding from "../components/Funding";
-import AddFunding from "../components/AddFunding";
+import AddFunding from '../components/AddFunding';
 
-const ProjectDetails = () => {
+function ProjectDetails() {
   const { id } = useParams();
   const { selectedProject, setSelectedProject } = useContext(
-    ProjectsContext
+    ProjectsContext,
   );
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const ProjectDetails = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id, setSelectedProject]);
   return (
     <div>
       {selectedProject && (
@@ -49,6 +49,6 @@ const ProjectDetails = () => {
       )}
     </div>
   );
-};
+}
 
 export default ProjectDetails;

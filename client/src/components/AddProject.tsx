@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddProject = () => {
+function AddProject() {
   return (
     <div>
       <h1>Add Project</h1>
     </div>
   );
-};
+}
 
 export default AddProject;

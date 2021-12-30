@@ -1,14 +1,12 @@
 import React from 'react';
-import {
-  AppBar, Box, Toolbar, Typography,
-} from '@mui/material';
+import { Typography } from '@mui/material';
 
-const Header = () => {
+function Header() {
   return (
     <div>
       <Typography variant="h1">Project Finder</Typography>
     </div>
   );
-};
+}
 
 export default Header;

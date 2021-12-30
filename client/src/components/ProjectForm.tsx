@@ -1,8 +1,8 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Button, Box, Grid, TextField, Alert,
 } from '@mui/material';
-import { ProjectsContext } from "../context/ProjectsContext";
+import { ProjectsContext } from '../context/ProjectsContext';
 
 export default function ProjectForm() {
   const { selectedProject, setSelectedProject } = useContext(ProjectsContext);
@@ -31,7 +31,7 @@ export default function ProjectForm() {
       response = await fetch('/api/projects', {
         method: 'POST',
         body: JSON.stringify({
-          title, tagline, description, fundingGoal, deadline, user
+          title, tagline, description, fundingGoal, deadline, user,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -70,119 +70,117 @@ export default function ProjectForm() {
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          marginTop: 3,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Box sx={{ mb: 3 }}>
-          {error ? (<Alert severity="error">{error}</Alert>) : null}
-          {message ? (<Alert severity="success">{message}</Alert>) : null}
-        </Box>
-        <Box component="form" noValidate onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                title="projecttitle"
-                required
-                fullWidth
-                id="title"
-                label="project title"
-                type="text"
-                value={title}
-                autoFocus
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="tagline"
-                label="project tagline"
-                title="tagline"
-                type="text"
-                value={tagline}
-                onChange={(e) => setTagline(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="description"
-                label="description"
-                title="description"
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="deadline"
-                label="deadline"
-                title="deadline"
-                type="text"
-                value={deadline}
-                onChange={(e) => setDeadline(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                title="funding goal"
-                label="fundingGoal"
-                id="fundingGoal"
-                type="number"
-                value={fundingGoal}
-                onChange={(e) => setFundingGoal(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                title="user"
-                label="User ID"
-                id="user"
-                type="number"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
-              />
-            </Grid>
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="center"
-            >
-              <Button
-                type="submit"
-                // variant="contained"
-                sx={{ my: 3, mr: 2 }}
-                href="/projects/view"
-              >
-                View All projects
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{ my: 3 }}
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
+    <Box
+      sx={{
+        marginTop: 3,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Box sx={{ mb: 3 }}>
+        {error ? (<Alert severity="error">{error}</Alert>) : null}
+        {message ? (<Alert severity="success">{message}</Alert>) : null}
       </Box>
-    </>
+      <Box component="form" noValidate onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              title="projecttitle"
+              required
+              fullWidth
+              id="title"
+              label="project title"
+              type="text"
+              value={title}
+              autoFocus
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="tagline"
+              label="project tagline"
+              title="tagline"
+              type="text"
+              value={tagline}
+              onChange={(e) => setTagline(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="description"
+              label="description"
+              title="description"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="deadline"
+              label="deadline"
+              title="deadline"
+              type="text"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              title="funding goal"
+              label="fundingGoal"
+              id="fundingGoal"
+              type="number"
+              value={fundingGoal}
+              onChange={(e) => setFundingGoal(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              title="user"
+              label="User ID"
+              id="user"
+              type="number"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            />
+          </Grid>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <Button
+              type="submit"
+                // variant="contained"
+              sx={{ my: 3, mr: 2 }}
+              href="/projects/view"
+            >
+              View All projects
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ my: 3 }}
+            >
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }

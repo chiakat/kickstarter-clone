@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ProjectData from '../apis/ProjectData';
-import { ProjectsContext } from "../context/ProjectsContext";
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import { IconButton, Alert, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { ProjectsContext } from '../context/ProjectsContext';
+import ProjectData from '../apis/ProjectData';
 
-
-interface row {
+interface Row {
   id: number;
 }
 
-interface cellValues {
-  row: row
+interface CellValues {
+  row: Row
 }
 
-const ProjectList = () => {
-  let navigate = useNavigate();
+function ProjectList() {
+  const navigate = useNavigate();
   const { projects, setProjects } = useContext(ProjectsContext);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
@@ -26,13 +25,15 @@ const ProjectList = () => {
     const getProjectData = async () => {
       try {
         const response = await ProjectData.get('/');
-        console.log(response.data)
+        console.log(response.data);
         setProjects(response.data.data.projects);
+        return null;
       } catch (err) {
         return setError('Unable to find projects');
       }
     };
     getProjectData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateProject = (projectId: number) => {
@@ -46,18 +47,17 @@ const ProjectList = () => {
     try {
       await ProjectData.delete(`/${projectId}`);
       setProjects(
-        projects.filter((project) => {
-          return project.id !== projectId;
-        })
+        projects.filter((project) => project.id !== projectId),
       );
+      return null;
     } catch (err) {
       return setError('Unable to delete');
     }
   };
 
-  const selectProject = (projectId: number) => {
-    navigate(`/projects/${projectId}`);
-  }
+  // const selectProject = (projectId: number) => {
+  //   navigate(`/projects/${projectId}`);
+  // };
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 80 },
@@ -82,23 +82,29 @@ const ProjectList = () => {
     {
       field: 'Edit',
       width: 80,
-      renderCell: (cellValues: cellValues) => (
-        <IconButton aria-label="update" color="primary"
-        onClick={() => {
-          updateProject(cellValues.row.id);
-        }}>
-        <EditIcon />
-      </IconButton>
+      renderCell: (cellValues: CellValues) => (
+        <IconButton
+          aria-label="update"
+          color="primary"
+          onClick={() => {
+            updateProject(cellValues.row.id);
+          }}
+        >
+          <EditIcon />
+        </IconButton>
       ),
     },
     {
       field: 'Delete',
       width: 80,
-      renderCell: (cellValues: cellValues) => (
-        <IconButton aria-label="delete" color="secondary"
+      renderCell: (cellValues: CellValues) => (
+        <IconButton
+          aria-label="delete"
+          color="secondary"
           onClick={() => {
             deleteProject(cellValues.row.id);
-          }}>
+          }}
+        >
           <DeleteIcon />
         </IconButton>
       ),

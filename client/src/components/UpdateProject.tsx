@@ -1,11 +1,11 @@
 import React from 'react';
 
-const UpdateProject = () => {
+function UpdateProject() {
   return (
     <div>
       <h1>Update Project</h1>
     </div>
   );
-};
+}
 
 export default UpdateProject;

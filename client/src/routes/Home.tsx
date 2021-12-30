@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import AddProject from '../components/AddProject';
 import ProjectList from '../components/ProjectList';
 
-const Home = () => {
+function Home() {
   return (
     <div>
       <Header />
@@ -11,6 +11,6 @@ const Home = () => {
       <ProjectList />
     </div>
   );
-};
+}
 
 export default Home;

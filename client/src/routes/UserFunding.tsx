@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-const UserFunding = () => {
+function UserFunding() {
   return (
     <div>
       <h1>User Funding</h1>
     </div>
   );
-};
+}
 
 export default UserFunding;
