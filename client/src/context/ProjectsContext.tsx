@@ -5,7 +5,7 @@ interface ProjectInterface {
   title: string;
   tagline: string;
   description: string;
-  funding: number;
+  fundingGoal: number;
   deadline: string;
   user_id: number;
 }

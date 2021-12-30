@@ -1,14 +1,14 @@
 import React from 'react';
-// import Header from '../components/Header';
-// import AddProject from '../components/AddProject';
-// import ProjectList from '../components/ProjectList';
+import Header from '../components/Header';
+import AddProject from '../components/AddProject';
+import ProjectList from '../components/ProjectList';
 
 const Home = () => {
   return (
     <div>
-      {/* <Header />
+      <Header />
       <AddProject />
-      <ProjectList /> */}
+      <ProjectList />
     </div>
   );
 };

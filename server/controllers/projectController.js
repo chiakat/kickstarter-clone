@@ -5,7 +5,7 @@ module.exports = {
   createProject: (req, res) => {
     console.log('create', req);
     const createProjectQuery = `INSERT INTO projects
-      (title, tagline, description, funding, deadline, user_id)
+      (title, tagline, description, funding_goal, deadline, user_id)
       VALUES ($1, $2, $3, $4, $5, $6)`;
     db.query(createProjectQuery, Object.values(req.body))
       .then(data => res.status(201).send('success: created project'))

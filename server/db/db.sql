@@ -23,7 +23,7 @@ CREATE TABLE projects (
   title VARCHAR(100) NOT NULL,
   tagline VARCHAR(200) NOT NULL,
   description VARCHAR(2000),
-  funding REAL NOT NULL,
+  funding_goal REAL NOT NULL,
   deadline DATE NOT NULL,
   user_id SERIAL NOT NULL REFERENCES users(id)
 );

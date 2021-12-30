@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProjectsContext } from "../context/ProjectsContext";
-import ProjectFinder from "../apis/ProjectFinder";
+import ProjectFinder from "../apis/ProjectData";
 // import Contributors from '../components/Contributors';
 // import Funding from "../components/Funding";
 import AddFunding from "../components/AddFunding";

@@ -1,9 +1,12 @@
 import React from 'react';
+import {
+  AppBar, Box, Toolbar, Typography,
+} from '@mui/material';
 
 const Header = () => {
   return (
     <div>
-      <h1>Project Finder</h1>
+      <Typography variant="h1">Project Finder</Typography>
     </div>
   );
 };
