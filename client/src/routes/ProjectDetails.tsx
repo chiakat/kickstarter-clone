@@ -6,7 +6,7 @@ import Contributors from '../components/Contributors';
 import Funding from "../components/Funding";
 import AddFunding from "../components/AddFunding";
 
-const ProjectDetailPage = () => {
+const ProjectDetails = () => {
   const { id } = useParams();
   const { selectedProject, setSelectedProject } = useContext(
     ProjectsContext
@@ -51,4 +51,4 @@ const ProjectDetailPage = () => {
   );
 };
 
-export default ProjectDetailPage;
+export default ProjectDetails;
