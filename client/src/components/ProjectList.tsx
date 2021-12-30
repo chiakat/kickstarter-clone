@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
-import { IconButton, Alert, Box } from '@mui/material';
+import {
+  IconButton, Alert, Box, Button,
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { ProjectsContext } from '../context/ProjectsContext';
@@ -9,6 +11,13 @@ import ProjectData from '../apis/ProjectData';
 
 interface Row {
   id: number;
+  title: string;
+  tagline: string;
+  description: string;
+  fundingGoal: number;
+  fundingReceived: number;
+  deadline: string;
+  user: number;
 }
 
 interface CellValues {
@@ -17,7 +26,10 @@ interface CellValues {
 
 function ProjectList() {
   const navigate = useNavigate();
-  const { projects, setProjects } = useContext(ProjectsContext);
+  const {
+    projects, setProjects, selectedProject, setSelectedProject,
+  } = useContext(ProjectsContext);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
@@ -42,6 +54,7 @@ function ProjectList() {
     // reset error and message
     setError('');
     setMessage('');
+    setShowDeleteAlert(false);
     try {
       await ProjectData.delete(`/${projectId}`);
       setProjects(
@@ -52,6 +65,31 @@ function ProjectList() {
       return setError('Unable to delete');
     }
   };
+
+  const handleDelete = (project: Row) => {
+    setSelectedProject(project);
+    setShowDeleteAlert(true);
+  };
+
+  const deleteAlert = selectedProject
+    ? (
+      <Alert
+        severity="error"
+        action={(
+          <>
+            <Button onClick={() => setShowDeleteAlert(false)}>
+              NO
+            </Button>
+            <Button onClick={() => deleteProject(selectedProject.id)}>
+              YES
+            </Button>
+          </>
+          )}
+      >
+        {`Are you sure you want to delete Project ${selectedProject.id}: ${selectedProject.title}?`}
+      </Alert>
+    )
+    : null;
 
   // const selectProject = (projectId: number) => {
   //   navigate(`/projects/${projectId}`);
@@ -100,7 +138,7 @@ function ProjectList() {
           aria-label="delete"
           color="secondary"
           onClick={() => {
-            deleteProject(cellValues.row.id);
+            handleDelete(cellValues.row);
           }}
         >
           <DeleteIcon />
@@ -116,6 +154,7 @@ function ProjectList() {
       <Box sx={{ mb: 3 }}>
         {error ? (<Alert severity="error">{error}</Alert>) : null}
         {message ? (<Alert severity="success">{message}</Alert>) : null}
+        {showDeleteAlert ? deleteAlert : null}
       </Box>
       <DataGrid
         rows={rows}
