@@ -25,16 +25,14 @@ function ProjectList() {
     const getProjectData = async () => {
       try {
         const response = await ProjectData.get('/');
-        console.log(response.data);
-        setProjects(response.data.data.projects);
+        setProjects(response.data);
         return null;
       } catch (err) {
         return setError('Unable to find projects');
       }
     };
     getProjectData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setProjects]);
 
   const updateProject = (projectId: number) => {
     navigate(`/projects/${projectId}/update`);
