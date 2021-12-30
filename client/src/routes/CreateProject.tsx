@@ -1,14 +1,13 @@
 import React from 'react';
-import Header from '../components/Header';
 import ProjectForm from '../components/ProjectForm';
 
-function Home() {
+function CreateProject() {
   return (
     <div>
-      <Header />
+      <h1>Create Project</h1>
       <ProjectForm />
     </div>
   );
 }
 
-export default Home;
+export default CreateProject;

@@ -46,8 +46,9 @@ function ProjectList() {
     getProjectData();
   }, [setProjects]);
 
-  const updateProject = (projectId: number) => {
-    navigate(`/projects/${projectId}/update`);
+  const updateProject = (project: Row) => {
+    setSelectedProject(project);
+    navigate(`/projects/${project.id}/update`);
   };
 
   const deleteProject = async (projectId: number) => {
@@ -147,7 +148,7 @@ function ProjectList() {
           aria-label="update"
           color="primary"
           onClick={() => {
-            updateProject(cellValues.row.id);
+            updateProject(cellValues.row);
           }}
         >
           <EditIcon />

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import {
-  Button, Box, Grid, TextField, Alert,
+  Button, Box, Grid, TextField, Alert, InputAdornment,
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
 
 export default function ProjectForm() {
-  const { selectedProject, setSelectedProject } = useContext(ProjectsContext);
+  const { selectedProject } = useContext(ProjectsContext);
   const project = selectedProject;
   const action = project ? 'Updated' : 'Added';
   const [title, setTitle] = useState(project ? project.title : '');
@@ -85,7 +85,7 @@ export default function ProjectForm() {
               required
               fullWidth
               id="title"
-              label="project title"
+              label="Title"
               type="text"
               value={title}
               autoFocus
@@ -97,7 +97,7 @@ export default function ProjectForm() {
               required
               fullWidth
               id="tagline"
-              label="project tagline"
+              label="Tagline"
               title="tagline"
               type="text"
               value={tagline}
@@ -106,11 +106,13 @@ export default function ProjectForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              required
+              multiline
               fullWidth
               id="description"
-              label="description"
+              label="Description"
               title="description"
+              rows={5}
+              maxRows={20}
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -121,9 +123,9 @@ export default function ProjectForm() {
               required
               fullWidth
               id="deadline"
-              label="deadline"
-              title="deadline"
-              type="text"
+              label="Deadline"
+              title="Deadline"
+              type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
             />
@@ -133,9 +135,12 @@ export default function ProjectForm() {
               required
               fullWidth
               title="funding goal"
-              label="fundingGoal"
+              label="Funding Goal"
               id="fundingGoal"
               type="number"
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
               value={fundingGoal}
               onChange={(e) => setFundingGoal(e.target.value)}
             />
