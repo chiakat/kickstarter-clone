@@ -6,10 +6,10 @@ interface ProjectInterface {
   title: string;
   tagline: string;
   description: string;
-  fundingGoal: number;
-  fundingReceived: number;
+  funding_goal: number;
+  funding_received: number;
   deadline: string;
-  user: number;
+  user_id: number;
 }
 
 // interface ProjectsInterface extends Array<ProjectInterface>{}

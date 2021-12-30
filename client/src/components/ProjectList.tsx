@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import {
-  IconButton, Alert, Box, Button,
+  IconButton, Alert, Box, Button, Link,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -14,10 +14,10 @@ interface Row {
   title: string;
   tagline: string;
   description: string;
-  fundingGoal: number;
-  fundingReceived: number;
+  funding_goal: number;
+  funding_received: number;
   deadline: string;
-  user: number;
+  user_id: number;
 }
 
 interface CellValues {
@@ -91,29 +91,53 @@ function ProjectList() {
     )
     : null;
 
-  // const selectProject = (projectId: number) => {
-  //   navigate(`/projects/${projectId}`);
-  // };
+  const selectProject = (projectId: number) => {
+    navigate(`/projects/${projectId}`);
+  };
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 80 },
     {
-      field: 'title', headerName: 'Project Title', flex: 1.8, minWidth: 80,
+      field: 'title',
+      headerName: 'Project Title',
+      flex: 1.8,
+      minWidth: 80,
+      renderCell: (cellValues: CellValues) => (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <Link
+          component="button"
+          underline="hover"
+          aria-label="navigate to project page"
+          onClick={() => {
+            selectProject(cellValues.row.id);
+          }}
+        >
+          {cellValues.row.title}
+        </Link>
+      ),
     },
     {
       field: 'tagline', headerName: 'Tagline', flex: 1.8, minWidth: 80,
     },
     {
-      field: 'fundingGoal', headerName: 'Funding Goal', flex: 1, minWidth: 50,
+      field: 'funding_goal',
+      headerName: 'Funding Goal',
+      flex: 1,
+      minWidth: 50,
+      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_goal}`),
     },
     {
-      field: 'fundingReceived', headerName: 'Funding Received', flex: 1, minWidth: 50,
+      field: 'funding_received',
+      headerName: 'Funding Received',
+      flex: 1,
+      minWidth: 50,
+      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_received}`),
     },
     {
       field: 'deadline', headerName: 'Deadline', flex: 1, minWidth: 50,
     },
     {
-      field: 'user', headerName: 'User', flex: 1, minWidth: 50,
+      field: 'user_id', headerName: 'User', flex: 1, minWidth: 50,
     },
     {
       field: 'Edit',

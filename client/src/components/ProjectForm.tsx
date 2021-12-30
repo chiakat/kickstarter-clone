@@ -11,9 +11,9 @@ export default function ProjectForm() {
   const [title, setTitle] = useState(project ? project.title : '');
   const [tagline, setTagline] = useState(project ? project.tagline : '');
   const [description, setDescription] = useState(project ? project.description : '');
-  const [fundingGoal, setFundingGoal] = useState(project ? project.tagline : '');
+  const [fundingGoal, setFundingGoal] = useState(project ? project.funding_goal : '');
   const [deadline, setDeadline] = useState(project ? project.deadline : '');
-  const [user, setUser] = useState(project ? project.user : '');
+  const [user, setUser] = useState(project ? project.user_id : '');
 
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
