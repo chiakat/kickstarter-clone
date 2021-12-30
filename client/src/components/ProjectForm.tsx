@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  Button, Box, Grid, TextField, Alert, InputAdornment,
+  Button, Box, Grid, TextField, Alert, InputAdornment, Link,
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
@@ -18,6 +18,7 @@ export default function ProjectForm() {
 
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,7 +60,7 @@ export default function ProjectForm() {
         setDeadline('');
         setUser('');
       }
-      return setMessage(`Success! ${action} ${data.title}`);
+      return setMessage(`Success! Project ${action}. See it `);
     }
     return setError('Unable to process request. Please try again.');
   };
@@ -75,7 +76,7 @@ export default function ProjectForm() {
     >
       <Box sx={{ mb: 3 }}>
         {error ? (<Alert severity="error">{error}</Alert>) : null}
-        {message ? (<Alert severity="success">{message}</Alert>) : null}
+        {message ? (<Alert severity="success">{message}<Link href="/projects/manage"> here</Link></Alert>) : null}
       </Box>
       <Box component="form" noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -122,6 +123,7 @@ export default function ProjectForm() {
             <TextField
               required
               fullWidth
+              InputLabelProps={{ shrink: true }}
               id="deadline"
               label="Deadline"
               title="Deadline"
