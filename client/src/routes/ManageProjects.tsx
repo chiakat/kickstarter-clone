@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import Header from '../components/Header';
-import ProjectList from '../components/ProjectList';
+import ProjectTable from '../components/ProjectTable';
 
 function ManageProjects() {
   return (
@@ -11,7 +11,7 @@ function ManageProjects() {
       <Button variant="contained" href="/projects/create" sx={{ mb: 3 }}>
         Create New Project
       </Button>
-      <ProjectList />
+      <ProjectTable />
     </div>
   );
 }

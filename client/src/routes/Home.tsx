@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
-import ProjectForm from '../components/ProjectForm';
+import ProjectFeed from '../components/ProjectFeed';
 
 function Home() {
   return (
     <div>
       <Header />
-      <ProjectForm />
+      <ProjectFeed />
     </div>
   );
 }

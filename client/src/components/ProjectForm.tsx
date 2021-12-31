@@ -19,7 +19,6 @@ export default function ProjectForm() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // reset error and message
@@ -76,7 +75,12 @@ export default function ProjectForm() {
     >
       <Box sx={{ mb: 3 }}>
         {error ? (<Alert severity="error">{error}</Alert>) : null}
-        {message ? (<Alert severity="success">{message}<Link href="/projects/manage"> here</Link></Alert>) : null}
+        {message ? (
+          <Alert severity="success">
+            {message}
+            <Link href="/projects/manage"> here</Link>
+          </Alert>
+        ) : null}
       </Box>
       <Box component="form" noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>

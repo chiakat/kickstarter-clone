@@ -24,7 +24,7 @@ interface CellValues {
   row: Row
 }
 
-function ProjectList() {
+function ProjectTable() {
   const navigate = useNavigate();
   const {
     projects, setProjects, selectedProject, setSelectedProject,
@@ -193,4 +193,4 @@ function ProjectList() {
   );
 }
 
-export default ProjectList;
+export default ProjectTable;
