@@ -6,7 +6,6 @@ import {
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
 
-
 function ProjectFeed() {
   const navigate = useNavigate();
 
@@ -50,7 +49,7 @@ function ProjectFeed() {
           >
             <Box
               component="img"
-              src="http://placeimg.com/300/200/any"
+              src={project.img_url}
               alt={project.title}
               height={200}
               sx={{

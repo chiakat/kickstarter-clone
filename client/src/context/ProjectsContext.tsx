@@ -1,14 +1,15 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 interface ProjectInterface {
   id: number;
   title: string;
   tagline: string;
-  description: string;
+  details: string;
   funding_goal: number;
   funding_received: number;
   deadline: string;
+  img_url?: string;
   user_id: number;
 }
 

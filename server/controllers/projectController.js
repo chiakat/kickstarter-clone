@@ -5,8 +5,8 @@ module.exports = {
   createProject: (req, res) => {
     console.log('create', req);
     const createProjectQuery = `INSERT INTO projects
-      (title, tagline, description, funding_goal, deadline, user_id)
-      VALUES ($1, $2, $3, $4, $5, $6)`;
+      (title, tagline, details, funding_goal, deadline, img_url, user_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`;
     db.query(createProjectQuery, Object.values(req.body))
       .then(data => res.status(201).send('success: created project'))
       .catch(err => res.status(500).send(err))
@@ -32,12 +32,13 @@ module.exports = {
       SET (
         title,
         tagline,
-        description,
+        details,
         funding,
         deadline,
+        img_url,
         user_id
       ) = (
-        $2, $3, $4, $5, $6)
+        $2, $3, $4, $5, $6, $7)
       WHERE user_id = $1`;
     db.query(updateProjectQuery, [req.params.id, ...Object.values(req.body)])
       .then(data => res.status(200).send(data.rows[0]))

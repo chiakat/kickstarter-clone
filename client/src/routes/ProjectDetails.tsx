@@ -6,6 +6,7 @@ import Header from '../components/Header';
 // import Contributors from '../components/Contributors';
 // import Funding from "../components/Funding";
 import AddFunding from '../components/AddFunding';
+import ProjectForm from '../components/ProjectForm';
 
 function ProjectDetails() {
   const { id } = useParams();
@@ -45,9 +46,9 @@ function ProjectDetails() {
       <h5>
         {selectedProject.tagline}
       </h5>
-      <img src="http://placeimg.com/640/480/any" />
+      <img src={selectedProject.img_url}/>
       <div>
-        {selectedProject.description}
+        {selectedProject.details}
       </div>
       <div>
         $

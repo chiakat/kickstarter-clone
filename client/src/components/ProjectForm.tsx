@@ -11,9 +11,10 @@ export default function ProjectForm() {
   const action = project ? 'Updated' : 'Added';
   const [title, setTitle] = useState(project ? project.title : '');
   const [tagline, setTagline] = useState(project ? project.tagline : '');
-  const [description, setDescription] = useState(project ? project.description : '');
+  const [details, setDetails] = useState(project ? project.details : '');
   const [fundingGoal, setFundingGoal] = useState(project ? project.funding_goal : '');
   const [deadline, setDeadline] = useState(project ? project.deadline : '');
+  const [image, setImage] = useState(project ? project.img_url : '');
   const [user, setUser] = useState(project ? project.user_id : '');
 
   const [error, setError] = useState('');
@@ -32,9 +33,10 @@ export default function ProjectForm() {
       response = await ProjectData.post('/', {
         title,
         tagline,
-        description,
+        details,
         funding_goal: fundingGoal,
         deadline,
+        image,
         user,
       });
     } else if (project === null) {
@@ -42,7 +44,7 @@ export default function ProjectForm() {
     } else {
       response = await ProjectData.put(`/${project.id}`, {
         data: {
-          title, tagline, description, fundingGoal, deadline, user,
+          title, tagline, details, fundingGoal, deadline, image, user,
         },
       });
     }
@@ -54,9 +56,10 @@ export default function ProjectForm() {
       if (action === 'Added') {
         setTitle('');
         setTagline('');
-        setDescription('');
+        setDetails('');
         setFundingGoal('');
         setDeadline('');
+        setImage('');
         setUser('');
       }
       return setMessage(`Success! Project ${action}. See it `);
@@ -113,14 +116,14 @@ export default function ProjectForm() {
             <TextField
               multiline
               fullWidth
-              id="description"
-              label="Description"
-              title="description"
+              id="details"
+              label="Details"
+              title="details"
               rows={5}
               maxRows={20}
               type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -134,6 +137,17 @@ export default function ProjectForm() {
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="image"
+              label="Image URL"
+              title="Image URL"
+              type="string"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

@@ -22,10 +22,11 @@ CREATE TABLE projects (
   id SERIAL NOT NULL PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
   tagline VARCHAR(200) NOT NULL,
-  description VARCHAR(2000),
+  details VARCHAR(2000),
   funding_goal REAL NOT NULL,
   funding_received REAL NOT NULL DEFAULT 0,
   deadline DATE NOT NULL,
+  img_url VARCHAR(2048),
   user_id SERIAL NOT NULL REFERENCES users(id)
 );
 
@@ -102,3 +103,21 @@ UPDATE users
 --     FROM users_projects
 --     GROUP BY project_id
 --   ) users_projects on users_projects.project_id = projects.id;
+
+INSERT INTO projects (
+  title,
+  tagline,
+  details,
+  funding_goal,
+  deadline,
+  img_url,
+  user_id )
+  VALUES (
+    'Test Project 1',
+    'The best idea ever',
+    'Lorem ipsum dolor sit amet. Et atque dolor ut quibusdam blanditiis eos ducimus aliquam et veritatis iste quo dicta omnis vel aliquid quisquam aut quidem possimus? Et ipsam animi et magni temporibus nam vitae quod hic dolores harum hic quos incidunt sed unde nesciunt ut ducimus quia! Rem magnam reprehenderit sit molestiae repellat vel quaerat quis. Vel nesciunt vero in voluptate architecto aut omnis nesciunt At tempora nihil vel accusamus laudantium aut porro ipsa in esse dolor.',
+    1500000,
+    '12-31-2022',
+    'http://placeimg.com/300/200/any',
+    1
+  );
