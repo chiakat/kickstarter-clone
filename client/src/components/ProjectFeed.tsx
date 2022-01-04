@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import {
   Box, Typography, Grid, Paper, Button,
 } from '@mui/material';
@@ -66,15 +67,21 @@ function ProjectFeed() {
                 {project.tagline}
               </Typography>
               <Typography variant="body2" color="text.secondary">
+                Goal:
+                {' '}
                 $
                 {project.funding_goal}
               </Typography>
               <Typography variant="body2">
+                Amount Raised:
+                {' '}
                 $
                 {project.funding_received}
               </Typography>
               <Typography variant="subtitle1" component="div">
-                {project.deadline}
+                Funding closes
+                {' '}
+                {moment(project.deadline, 'YYYYMMDD').fromNow()}
               </Typography>
             </Grid>
           </Grid>

@@ -33,13 +33,15 @@ module.exports = {
         title,
         tagline,
         details,
-        funding,
+        funding_goal,
+        funding_received,
         deadline,
         img_url,
         user_id
       ) = (
-        $2, $3, $4, $5, $6, $7)
-      WHERE user_id = $1`;
+        $2, $3, $4, $5, $6, $7, $8, $9)
+      WHERE id = $1`;
+      console.log(req)
     db.query(updateProjectQuery, [req.params.id, ...Object.values(req.body)])
       .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(500).send(err))

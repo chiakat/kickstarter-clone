@@ -13,6 +13,7 @@ export default function ProjectForm() {
   const [tagline, setTagline] = useState(project ? project.tagline : '');
   const [details, setDetails] = useState(project ? project.details : '');
   const [fundingGoal, setFundingGoal] = useState(project ? project.funding_goal : '');
+  const fundingReceived = project ? project.funding_received : 0;
   const [deadline, setDeadline] = useState(project ? project.deadline : '');
   const [image, setImage] = useState(project ? project.img_url : '');
   const [user, setUser] = useState(project ? project.user_id : '');
@@ -44,7 +45,7 @@ export default function ProjectForm() {
     } else {
       response = await ProjectData.put(`/${project.id}`, {
         data: {
-          title, tagline, details, fundingGoal, deadline, image, user,
+          title, tagline, details, fundingGoal, fundingReceived, deadline, image, user,
         },
       });
     }
