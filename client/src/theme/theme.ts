@@ -15,7 +15,7 @@ const rawTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Francois One', 'DM Sans','Work Sans', sans-serif",
+    fontFamily: "'Lato', 'Francois One', 'DM Sans','Work Sans', sans-serif",
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
@@ -46,7 +46,7 @@ const rawTheme = createTheme({
 const fontHeader = {
   color: rawTheme.palette.text.primary,
   fontWeight: rawTheme.typography.fontWeightMedium,
-  fontFamily: "'Francois One', 'DM Sans', sans-serif",
+  fontFamily: "'Lato', 'Francois One', 'DM Sans', sans-serif",
 };
 
 const theme = {
