@@ -43,50 +43,52 @@ function ProjectFeed() {
     }}
     >
       {projects.map((project) => (
-        <Grid container spacing={2} sx={{ width: '100%' }}>
-          <Grid
-            item
-            sx={{ flexGrow: 1 }}
-          >
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            mx: 1, my: 3, width: '100%', borderTop: 1, borderColor: 'primary.main',
+          }}
+        >
+          <Grid item md>
             <Box
               component="img"
               src={project.img_url}
               alt={project.title}
               height={200}
-              sx={{
-                px: 1, py: 1,
-              }}
+              width={300}
             />
           </Grid>
-          <Grid item sm container direction="column" spacing={2} sx={{ flexGrow: 3 }}>
+          <Grid item container md direction="column" spacing={2}>
             <Grid item sm>
-              <Typography gutterBottom variant="h6" component="div">
+              <Typography gutterBottom variant="h4" component="div" textAlign="left">
                 {project.title}
               </Typography>
-              <Typography variant="subtitle1" gutterBottom>
+              <Typography variant="subtitle1" textAlign="left" gutterBottom>
                 {project.tagline}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body1" textAlign="left" color="text.secondary">
                 Goal:
                 {' '}
                 $
                 {project.funding_goal}
               </Typography>
-              <Typography variant="body2">
+              <Typography variant="body1" textAlign="left">
                 Amount Raised:
                 {' '}
                 $
                 {project.funding_received}
               </Typography>
-              <Typography variant="subtitle1" component="div">
-                Funding closes
-                {' '}
-                {moment(project.deadline, 'YYYYMMDD').fromNow()}
-              </Typography>
+
             </Grid>
           </Grid>
-          <Grid item>
-            <Button onClick={() => navigate(`/projects/${project.id}`)}>Fund Me!</Button>
+          <Grid item container direction="column" sx={{ width: 100, mx: 2 }}>
+            <Typography variant="body2" component="div" color="text.secondary">
+              Funding closes
+              {' '}
+              {moment(project.deadline, 'YYYYMMDD').fromNow()}
+            </Typography>
+            <Button onClick={() => navigate(`/projects/${project.id}`)} sx={{ m: 2 }} variant="contained">Fund Me!</Button>
           </Grid>
         </Grid>
       ))}
