@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Box, TextField, InputAdornment, Typography,
+  Box, TextField, Button, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
 interface SearchProps{
   setSearchInput: React.Dispatch<React.SetStateAction<string>>,
@@ -19,10 +20,22 @@ const Search = function ({ setSearchInput }: SearchProps) {
     setCurrentInput('');
   };
 
+  const clearSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchInput('');
+    setCurrentInput('');
+  };
+
   return (
-    <Box component="form" sx={{ display: 'flex', mt: 10, mb: 2 }} onSubmit={(handleSubmit)}>
+    <Box
+      component="form"
+      sx={{
+        display: 'flex', mt: 10, mb: 2, justifyContent: 'space-around',
+      }}
+      onSubmit={handleSubmit}
+    >
       <Typography variant="h4" textAlign="center" sx={{ mr: 5 }}>
-        Fund a new project:
+        Find a new project:
         {' '}
       </Typography>
       <TextField
@@ -30,13 +43,28 @@ const Search = function ({ setSearchInput }: SearchProps) {
         value={currentInput}
         onChange={(e) => setCurrentInput(e.target.value)}
         placeholder="Search"
-        InputProps={(
-          <InputAdornment position="end">
-            <SearchIcon />
-          </InputAdornment>
-            )}
         aria-describedby="search-helper-text"
       />
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          m: 1, p: 1, height: 40, color: 'white',
+        }}
+        onClick={() => handleSubmit}
+      >
+        <SearchIcon />
+      </Button>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          backgroundColor: 'text.secondary', my: 1, p: 1, height: 40, color: 'white',
+        }}
+        onClick={() => clearSearch}
+      >
+        <ClearIcon />
+      </Button>
     </Box>
   );
 };
@@ -44,10 +72,5 @@ const Search = function ({ setSearchInput }: SearchProps) {
 export default Search;
 
 Search.propTypes = {
-  searchInput: PropTypes.string,
   setSearchInput: PropTypes.func.isRequired,
-};
-
-Search.defaultProps = {
-  searchInput: '',
 };

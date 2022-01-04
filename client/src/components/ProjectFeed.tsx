@@ -5,7 +5,6 @@ import {
   AppBar, Button, Card, CardActions, CardContent, CardMedia,
   Grid, Stack, Box, Toolbar, Typography, Container, Link,
 } from '@mui/material';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
 import Search from './Search';
@@ -58,7 +57,7 @@ function ProjectFeed() {
           pb: 6,
         }}
       >
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <Typography
             component="h1"
             variant="h2"
@@ -77,7 +76,7 @@ function ProjectFeed() {
             spacing={2}
             justifyContent="center"
           >
-            <Search searchInput={searchInput} setSearchInput={setSearchInput} />
+            <Search setSearchInput={setSearchInput} />
           </Stack>
         </Container>
       </Box>
@@ -103,8 +102,8 @@ function ProjectFeed() {
                   <Typography>
                     {project.tagline}
                   </Typography>
-                  <Box sx={{ borderTop: 3, borderColor: 'primary.main', my: 2 }} />
-                  <Typography variant="body1" textAlign="left" color="primary.dark">
+                  <Box sx={{ borderTop: 3, borderColor: 'primary.dark', my: 3 }} />
+                  <Typography variant="body1" textAlign="left" color="primary.main" gutterBottom>
                     Goal:
                     {' '}
                     $
@@ -117,13 +116,13 @@ function ProjectFeed() {
                     {project.funding_received}
                   </Typography>
                 </CardContent>
-                <CardActions sx={{ justifyContent: 'space-evenly' }}>
+                <CardActions sx={{ justifyContent: 'space-between' }}>
                   <Typography variant="body2" component="div" color="text.secondary" sx={{ m: 1 }}>
                     Funding closes
                     {' '}
                     {moment(project.deadline, 'YYYYMMDD').fromNow()}
                   </Typography>
-                  <Button onClick={() => navigate(`/projects/${project.id}`)} sx={{ m: 1, backgroundColor: 'primary.light' }} variant="contained">Fund</Button>
+                  <Button onClick={() => navigate(`/projects/${project.id}`)} sx={{ m: 1, color: 'white', backgroundColor: 'primary.main' }} variant="contained">Fund</Button>
                 </CardActions>
               </Card>
             </Grid>
