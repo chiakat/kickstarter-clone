@@ -91,8 +91,7 @@ function ProjectFeed() {
                 <CardMedia
                   component="img"
                   sx={{
-                    // 16:9
-                    pt: '56.25%',
+                    height: '56.25%',
                   }}
                   image={project.img_url}
                   alt={project.title}
@@ -104,7 +103,8 @@ function ProjectFeed() {
                   <Typography>
                     {project.tagline}
                   </Typography>
-                  <Typography variant="body1" textAlign="left" color="text.secondary">
+                  <Box sx={{ borderTop: 3, borderColor: 'primary.main', my: 2 }} />
+                  <Typography variant="body1" textAlign="left" color="primary.dark">
                     Goal:
                     {' '}
                     $
@@ -117,13 +117,13 @@ function ProjectFeed() {
                     {project.funding_received}
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button onClick={() => navigate(`/projects/${project.id}`)} sx={{ m: 2 }} variant="contained">Fund Me!</Button>
-                  <Typography variant="body2" component="div" color="text.secondary">
+                <CardActions sx={{ justifyContent: 'space-evenly' }}>
+                  <Typography variant="body2" component="div" color="text.secondary" sx={{ m: 1 }}>
                     Funding closes
                     {' '}
                     {moment(project.deadline, 'YYYYMMDD').fromNow()}
                   </Typography>
+                  <Button onClick={() => navigate(`/projects/${project.id}`)} sx={{ m: 1, backgroundColor: 'primary.light' }} variant="contained">Fund</Button>
                 </CardActions>
               </Card>
             </Grid>
