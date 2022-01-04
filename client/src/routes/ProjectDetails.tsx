@@ -6,8 +6,6 @@ import {
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectFinder from '../apis/ProjectData';
-// import Contributors from '../components/Contributors';
-// import Funding from "../components/Funding";
 import AddFunding from '../components/AddFunding';
 import Nav from '../components/Nav';
 
