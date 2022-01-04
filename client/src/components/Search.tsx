@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Box, TextField, Button, Typography,
+  Grid, Box, TextField, Button, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
@@ -27,14 +27,16 @@ const Search = function ({ setSearchInput }: SearchProps) {
   };
 
   return (
-    <Box
+    <Grid
+      container
+      md
       component="form"
       sx={{
-        display: 'flex', mt: 10, mb: 2, justifyContent: 'space-around',
+        display: 'flex', mt: 10, mb: 2, justifyContent: 'flex-end',
       }}
       onSubmit={handleSubmit}
     >
-      <Typography variant="h4" textAlign="center" sx={{ mr: 5 }}>
+      <Typography variant="h5" sx={{ mr: 1, py: 1 }}>
         Find a new project:
         {' '}
       </Typography>
@@ -44,28 +46,31 @@ const Search = function ({ setSearchInput }: SearchProps) {
         onChange={(e) => setCurrentInput(e.target.value)}
         placeholder="Search"
         aria-describedby="search-helper-text"
+        sx={{ flexGrow: 2 }}
       />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          m: 1, p: 1, height: 40, color: 'white',
-        }}
-        onClick={() => handleSubmit}
-      >
-        <SearchIcon />
-      </Button>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          backgroundColor: 'text.secondary', my: 1, p: 1, height: 40, color: 'white',
-        }}
-        onClick={() => clearSearch}
-      >
-        <ClearIcon />
-      </Button>
-    </Box>
+      <Grid item>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            m: 1, p: 1, height: 40, color: 'white',
+          }}
+          onClick={() => handleSubmit}
+        >
+          <SearchIcon />
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: 'text.secondary', my: 1, p: 1, height: 40, color: 'white',
+          }}
+          onClick={() => clearSearch}
+        >
+          <ClearIcon />
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 

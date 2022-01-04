@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  Button, Box, Grid, TextField, Alert, InputAdornment, Link,
+  Button, Box, Grid, TextField, Alert, InputAdornment, Link, Container,
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
@@ -69,138 +69,140 @@ export default function ProjectForm() {
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 3,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Box sx={{ mb: 3 }}>
-        {error ? (<Alert severity="error">{error}</Alert>) : null}
-        {message ? (
-          <Alert severity="success">
-            {message}
-            <Link href="/projects/manage"> here</Link>
-          </Alert>
-        ) : null}
-      </Box>
-      <Box component="form" noValidate onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              title="projecttitle"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              type="text"
-              value={title}
-              autoFocus
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="tagline"
-              label="Tagline"
-              title="tagline"
-              type="text"
-              value={tagline}
-              onChange={(e) => setTagline(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              multiline
-              fullWidth
-              id="details"
-              label="Details"
-              title="details"
-              rows={5}
-              maxRows={20}
-              type="text"
-              value={details}
-              onChange={(e) => setDetails(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              id="deadline"
-              label="Deadline"
-              title="Deadline"
-              type="date"
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="image"
-              label="Image URL"
-              title="Image URL"
-              type="string"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              title="funding goal"
-              label="Funding Goal"
-              id="fundingGoal"
-              type="number"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
-              }}
-              value={fundingGoal}
-              onChange={(e) => setFundingGoal(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              title="user"
-              label="User ID"
-              id="user"
-              type="number"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-            />
-          </Grid>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <Button
-              type="submit"
-              sx={{ my: 3, mr: 2 }}
-              href="/projects/manage"
+    <Container>
+      <Box
+        sx={{
+          marginTop: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box sx={{ mb: 3 }}>
+          {error ? (<Alert severity="error">{error}</Alert>) : null}
+          {message ? (
+            <Alert severity="success">
+              {message}
+              <Link href="/projects/manage"> here</Link>
+            </Alert>
+          ) : null}
+        </Box>
+        <Box component="form" noValidate onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                title="projecttitle"
+                required
+                fullWidth
+                id="title"
+                label="Title"
+                type="text"
+                value={title}
+                autoFocus
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="tagline"
+                label="Tagline"
+                title="tagline"
+                type="text"
+                value={tagline}
+                onChange={(e) => setTagline(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                multiline
+                fullWidth
+                id="details"
+                label="Details"
+                title="details"
+                rows={5}
+                maxRows={20}
+                type="text"
+                value={details}
+                onChange={(e) => setDetails(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                id="deadline"
+                label="Deadline"
+                title="Deadline"
+                type="date"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id="image"
+                label="Image URL"
+                title="Image URL"
+                type="string"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                title="funding goal"
+                label="Funding Goal"
+                id="fundingGoal"
+                type="number"
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                }}
+                value={fundingGoal}
+                onChange={(e) => setFundingGoal(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                title="user"
+                label="User ID"
+                id="user"
+                type="number"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              />
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
             >
-              View All projects
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ my: 3 }}
-            >
-              Submit
-            </Button>
+              <Button
+                type="submit"
+                sx={{ my: 3, mr: 2 }}
+                href="/projects/manage"
+              >
+                View All projects
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ my: 3 }}
+              >
+                Submit
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 }

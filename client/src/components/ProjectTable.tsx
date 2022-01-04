@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import {
-  IconButton, Alert, Box, Button, Link,
+  IconButton, Alert, Box, Button, Link, Container,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -176,7 +176,8 @@ function ProjectTable() {
   const rows = projects;
 
   return (
-    <>
+    <Container>
+    {/* <Grid container md sx={{ mx: 10, width: '90%', display: 'flex', flexDirection: 'column' }}> */}
       <Box sx={{ mb: 3 }}>
         {error ? (<Alert severity="error">{error}</Alert>) : null}
         {message ? (<Alert severity="success">{message}</Alert>) : null}
@@ -190,7 +191,8 @@ function ProjectTable() {
         autoPageSize
         sx={{ height: 400, width: '100%', backgroundColor: 'white' }}
       />
-    </>
+    {/* </Grid> */}
+    </Container>
   );
 }
 

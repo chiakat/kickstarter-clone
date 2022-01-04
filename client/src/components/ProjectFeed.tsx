@@ -60,7 +60,7 @@ function ProjectFeed() {
         <Container maxWidth="md">
           <Typography
             component="h1"
-            variant="h2"
+            variant="h1"
             align="center"
             color="text.primary"
             gutterBottom
