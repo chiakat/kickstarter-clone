@@ -41,7 +41,7 @@
       "airbnb-typescript"
     ],
     "parserOptions": {
-      "project": "client/tsconfig.json"
+      "project": "tsconfig.json"
     }
   },
   "browserslist": {

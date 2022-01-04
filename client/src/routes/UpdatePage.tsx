@@ -1,15 +1,15 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 import ProjectForm from '../components/ProjectForm';
 import Nav from '../components/Nav';
 
-
 function UpdatePage() {
   return (
-    <div>
+    <>
       <Nav />
-      <h1>Update Project</h1>
+      <Typography variant="h4" gutterBottom sx={{ my: 5 }}>Update Projects</Typography>
       <ProjectForm />
-    </div>
+    </>
   );
 }
 

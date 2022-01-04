@@ -91,8 +91,8 @@ const theme = {
     h6: {
       ...rawTheme.typography.h6,
       ...fontHeader,
-      fontSize: 24,
-      fontWeight: rawTheme.typography.fontWeightLight,
+      fontSize: 22,
+      fontWeight: rawTheme.typography.fontWeightMedium,
     },
     subtitle1: {
       ...rawTheme.typography.subtitle1,

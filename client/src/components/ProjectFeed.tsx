@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import {
-  AppBar, Button, Card, CardActions, CardContent, CardMedia,
-  Grid, Stack, Box, Toolbar, Typography, Container, Link,
+  Button, Card, CardActions, CardContent, CardMedia,
+  Grid, Stack, Box, Typography, Container,
 } from '@mui/material';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
@@ -26,6 +26,7 @@ function ProjectFeed() {
         setProjects(response.data);
         return null;
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
         return null;
       }
@@ -80,7 +81,7 @@ function ProjectFeed() {
           </Stack>
         </Container>
       </Box>
-      <Container sx={{ py: 8 }} maxWidth="md">
+      <Container sx={{ py: 8 }} maxWidth="lg">
         <Grid container spacing={4}>
           {filteredProjects.map((project) => (
             <Grid item key={project.id} xs={12} sm={6} md={4}>
@@ -90,13 +91,13 @@ function ProjectFeed() {
                 <CardMedia
                   component="img"
                   sx={{
-                    height: '56.25%',
+                    height: 200,
                   }}
                   image={project.img_url}
                   alt={project.title}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h6" component="h2">
                     {project.title}
                   </Typography>
                   <Typography>
@@ -107,13 +108,13 @@ function ProjectFeed() {
                     Goal:
                     {' '}
                     $
-                    {project.funding_goal}
+                    {project.funding_goal.toLocaleString('en-US')}
                   </Typography>
                   <Typography variant="body1" textAlign="left">
                     Amount Raised:
                     {' '}
                     $
-                    {project.funding_received}
+                    {project.funding_received.toLocaleString('en-US')}
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ justifyContent: 'space-between' }}>

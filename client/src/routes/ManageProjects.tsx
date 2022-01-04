@@ -3,7 +3,6 @@ import { Button, Typography } from '@mui/material';
 import ProjectTable from '../components/ProjectTable';
 import Nav from '../components/Nav';
 
-
 function ManageProjects() {
   return (
     <div>

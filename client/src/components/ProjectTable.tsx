@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import { DataGrid } from '@mui/x-data-grid';
 import {
   IconButton, Alert, Box, Button, Link, Container,
@@ -126,17 +127,21 @@ function ProjectTable() {
       headerName: 'Funding Goal',
       flex: 1,
       minWidth: 50,
-      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_goal}`),
+      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_goal.toLocaleString('en-US')}`),
     },
     {
       field: 'funding_received',
       headerName: 'Funding Received',
       flex: 1,
       minWidth: 50,
-      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_received}`),
+      renderCell: (cellValues: CellValues) => (`$${cellValues.row.funding_received.toLocaleString('en-US')}`),
     },
     {
-      field: 'deadline', headerName: 'Deadline', flex: 1, minWidth: 50,
+      field: 'deadline',
+      headerName: 'Funding Deadline',
+      flex: 1,
+      minWidth: 50,
+      renderCell: (cellValues: CellValues) => moment(cellValues.row.deadline, 'YYYYMMDD').format('L'),
     },
     {
       field: 'user_id', headerName: 'User', flex: 1, minWidth: 50,
@@ -177,7 +182,6 @@ function ProjectTable() {
 
   return (
     <Container>
-    {/* <Grid container md sx={{ mx: 10, width: '90%', display: 'flex', flexDirection: 'column' }}> */}
       <Box sx={{ mb: 3 }}>
         {error ? (<Alert severity="error">{error}</Alert>) : null}
         {message ? (<Alert severity="success">{message}</Alert>) : null}
@@ -191,7 +195,6 @@ function ProjectTable() {
         autoPageSize
         sx={{ height: 400, width: '100%', backgroundColor: 'white' }}
       />
-    {/* </Grid> */}
     </Container>
   );
 }

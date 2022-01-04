@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Grid, Box, TextField, Button, Typography,
+  Grid, TextField, Button, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
