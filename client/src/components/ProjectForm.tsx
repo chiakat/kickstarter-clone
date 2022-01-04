@@ -17,6 +17,7 @@ export default function ProjectForm() {
   const [deadline, setDeadline] = useState(project ? project.deadline : '');
   const [image, setImage] = useState(project ? project.img_url : '');
   const [user, setUser] = useState(project ? project.user_id : '');
+  const projectLink = project ? `/projects/${project.id}` : '/projects/manage';
 
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
@@ -30,31 +31,29 @@ export default function ProjectForm() {
     if (!title || !tagline) return setError('All fields are required');
 
     let response;
-    if (action === 'Added') {
-      response = await ProjectData.post('/', {
-        title,
-        tagline,
-        details,
-        funding_goal: fundingGoal,
-        deadline,
-        image,
-        user,
-      });
-    } else if (project === null) {
-      return setError('No project selected.');
-    } else {
-      response = await ProjectData.put(`/${project.id}`, {
-        data: {
-          title, tagline, details, fundingGoal, fundingReceived, deadline, image, user,
-        },
-      });
-    }
 
-    const data = action === 'Added' ? response.data[0] : response.data;
-
-    if (data) {
-      // reset form for added project
+    try {
       if (action === 'Added') {
+        response = await ProjectData.post('/', {
+          title,
+          tagline,
+          details,
+          funding_goal: fundingGoal,
+          deadline,
+          image,
+          user,
+        });
+      } else if (project === null) {
+        return setError('No project selected.');
+      } else {
+        response = await ProjectData.put(`/${project.id}`, {
+          title, tagline, details, fundingGoal, fundingReceived, deadline, image, user,
+        });
+      }
+
+      const data = action === 'Added' ? response.data[0] : response.data;
+
+      if (data && action === 'Added') {
         setTitle('');
         setTagline('');
         setDetails('');
@@ -64,8 +63,9 @@ export default function ProjectForm() {
         setUser('');
       }
       return setMessage(`Success! Project ${action}. See it `);
+    } catch {
+      return setError('Unable to process request. Please try again.');
     }
-    return setError('Unable to process request. Please try again.');
   };
 
   return (
@@ -86,7 +86,7 @@ export default function ProjectForm() {
               {message ? (
                 <Alert severity="success">
                   {message}
-                  <Link href="/projects/manage"> here</Link>
+                  <Link href={projectLink}> here</Link>
                 </Alert>
               ) : null}
             </Box>

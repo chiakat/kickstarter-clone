@@ -46,7 +46,7 @@ function ProjectDetails() {
         <Typography gutterBottom variant="h6" component="h2" sx={{ fontWeight: 'light' }}>
           {selectedProject.tagline}
         </Typography>
-        <Grid container lg>
+        <Grid container item lg>
           <Grid container item lg sx={{ m: 3 }}>
             <Box
               component="img"

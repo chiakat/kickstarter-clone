@@ -22,25 +22,24 @@ export default function AddFunding() {
     if (parseInt(funding, 10) <= 0) return setError('Please enter an amount');
 
     let response;
-    if (project) {
-      const {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        title, tagline, details, funding_goal, funding_received, deadline, user_id,
-      } = project;
-
-      const newFunding = funding + funding_received;
-      response = await ProjectData.put(`/${project.id}`, {
-        data: {
-          title, tagline, details, funding_goal, newFunding, deadline, user_id,
-        },
-      });
-    }
-
-    if (project && response) {
+    try {
+      if (project) {
+        const newFunding = parseInt(funding, 10) + project.funding_received;
+        response = await ProjectData.patch(`/${project.id}/funding`, {
+          newFunding,
+        });
+        return setMessage(`Success! You've contributed ${funding} to ${project.title}. Thank you!`);
+      }
+      if (project && response) {
       // reset form for added project
-      return setMessage(`Success! You've contributed ${funding} to ${project.title}. Thank you!`);
+        setMessage(`Success! You've contributed ${funding}. Thank you!`);
+        setFunding('');
+        return null;
+      }
+    } catch (err) {
+      return setError(`${err}. Please try again.`);
     }
-    return setError('Unable to process request. Please try again.');
+    return null;
   };
 
   return (

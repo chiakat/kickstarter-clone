@@ -13,6 +13,9 @@ router.get("/:id", projectController.getProject);
 // Update a Project with id
 router.put("/:id", projectController.updateProject);
 
+// Update a Project's Funding
+router.patch("/:id/funding", projectController.updateProjectFunding);
+
 // Delete a Project with id
 router.delete("/:id", projectController.deleteProject);
 

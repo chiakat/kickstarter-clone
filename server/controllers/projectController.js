@@ -41,11 +41,24 @@ module.exports = {
       ) = (
         $2, $3, $4, $5, $6, $7, $8, $9)
       WHERE id = $1`;
-      console.log(req)
+      console.log(req.params.id)
+      console.log(Object.values(req.body))
     db.query(updateProjectQuery, [req.params.id, ...Object.values(req.body)])
       .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(500).send(err))
   },
+
+    // updates a project funding only
+    updateProjectFunding: (req, res) => {
+      const updateProjectQuery = `UPDATE projects
+        SET funding_received = $2
+        WHERE id = $1`;
+        console.log(req.params.id)
+        console.log(Object.values(req.body))
+      db.query(updateProjectQuery, [req.params.id], Object.values(req.body))
+        .then(data => res.status(200).send(data.rows[0]))
+        .catch(err => res.status(500).send(err))
+    },
 
   // deletes a project
   deleteProject: (req, res) => {
@@ -53,21 +66,4 @@ module.exports = {
       .then(data => res.status(204).send('success: deleted'))
       .catch(err => res.status(500).send(err))
   }
-
-  // // add project funding
-  // fundProject: (req, res) => {
-  //   const newFunding = await db.query(
-  //     "INSERT INTO users_projects (project_id, users_id, funding) values ($1, $2, $3) returning *;",
-  //     [req.params.id, req.body.project_id, req.body.users_id, req.body.funding]
-  //   );
-  //   console.log(fund);
-  //   res.status(201).json({
-  //     status: "success",
-  //     data: {
-  //       project: fund.rows[0],
-  //     },
-  //   });
-  // } catch (err) {
-  //   console.log(err);
-  // }
 };
