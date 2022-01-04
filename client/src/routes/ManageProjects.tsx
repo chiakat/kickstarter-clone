@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import Header from '../components/Header';
 import ProjectTable from '../components/ProjectTable';
+import Nav from '../components/Nav';
+
 
 function ManageProjects() {
   return (
     <div>
-      <Header />
+      <Nav />
       <h1>Manage Projects</h1>
       <Button variant="contained" href="/projects/create" sx={{ mb: 3 }}>
         Create New Project

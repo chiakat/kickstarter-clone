@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  AppBar, Box, Toolbar, Typography, Link,
+  AppBar, Box, Toolbar, Link, Button,
 } from '@mui/material';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 interface NavLink {
   label: string,
@@ -10,14 +11,11 @@ interface NavLink {
 
 const mainNav = [
   {
-    label: 'Home',
-    path: '/',
+    label: 'Manage projects',
+    path: '/projects/manage',
   },
-];
-
-const rightNav = [
   {
-    label: 'Create Project',
+    label: 'Create a Project',
     path: '/projects/create',
   },
 ];
@@ -29,61 +27,63 @@ export default function Nav() {
   const renderLogin = () => {
     if (!session) {
       return (
-        <Link
+        <Button
+          variant="outlined"
           href="/api/auth/signin"
           // onClick={(e) => {
           //   e.preventDefault();
           //   signIn();
           // }}
+          sx={{ my: 1, mx: 1.5, color: 'white' }}
         >
           Log in
-        </Link>
+        </Button>
       );
     }
     return (
-      <Link
+      <Button
+        variant="outlined"
         href="/api/auth/signout"
           // onClick={(e) => {
           //   e.preventDefault();
           //   signOut();
           // }}
+        sx={{ my: 1, mx: 1.5, color: 'white' }}
       >
         Log out
-      </Link>
+      </Button>
     );
   };
 
   return (
-    <AppBar position="static" elevation={0} sx={{ background: 'none', color: 'grey', px: 1 }}>
-      <Toolbar>
-        {mainNav.map((item: NavLink) => (
-          <Typography key={item.label} variant="h6" component="div" sx={{ pr: 1, py: 1 }}>
-            <Link href={item.path}>
+    <AppBar position="static" elevation={3} sx={{ color: 'white', px: 1 }}>
+      <Toolbar sx={{ flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', justifyItems: 'flex-start', flexGrow: 1 }}>
+          <Link
+            variant="button"
+            underline="none"
+            href="/"
+            sx={{
+              my: 1, mx: 1.5, color: 'white', textAlign: 'left', fontSize: 'large',
+            }}
+          >
+            <RocketLaunchIcon sx={{ mr: 2, fontSize: 20 }} />
+            Kickstarter
+          </Link>
+        </Box>
+        <nav>
+          {mainNav.map((item: NavLink) => (
+            <Link
+              key={item.label}
+              href={item.path}
+              variant="button"
+              sx={{ my: 1, mx: 1.5, color: 'white' }}
+            >
               {item.label}
             </Link>
-          </Typography>
-        ))}
-        <Box sx={{ flexGrow: 3 }} />
-        <Box
-          component="img"
-          src="/logo192.png"
-          alt="KickStarter Logo"
-          height={50}
-          sx={{
-            px: 1, py: 1,
-          }}
-        />
-        <Typography variant="h2" color="teal">Kickstarter</Typography>
-        {rightNav.map((item: NavLink) => (
-          <Typography key={item.label} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link href={item.path}>
-              {item.label}
-            </Link>
-          </Typography>
-        ))}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {renderLogin()}
-        </Typography>
+          ))}
+        </nav>
+        {renderLogin()}
       </Toolbar>
     </AppBar>
   );

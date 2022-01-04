@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectFinder from '../apis/ProjectData';
-import Header from '../components/Header';
 // import Contributors from '../components/Contributors';
 // import Funding from "../components/Funding";
 import AddFunding from '../components/AddFunding';
+import Nav from '../components/Nav';
+
 
 function ProjectDetails() {
   const { id } = useParams();
@@ -38,7 +39,7 @@ function ProjectDetails() {
   }
   return (
     <>
-      <Header />
+      <Nav />
       <div>
         <h1>
           {selectedProject.title}

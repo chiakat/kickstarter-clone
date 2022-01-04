@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
+import Nav from '../components/Nav';
 import ProjectFeed from '../components/ProjectFeed';
 
 function Home() {
   return (
     <div>
-      <Header />
+      <Nav />
       <ProjectFeed />
     </div>
   );
