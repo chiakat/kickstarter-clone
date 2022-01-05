@@ -10,6 +10,7 @@ import { ProjectsProvider } from './context/ProjectsContext';
 import './css/App.css';
 import CreateProject from './routes/CreateProject';
 import theme from './theme/theme';
+import FundingSuccess from './routes/FundingSuccess';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/projects/manage" element={<ManageProjects />} />
               <Route path="/projects/:id/update" element={<UpdatePage />} />
               <Route path="/projects/:id" element={<ProjectDetails />} />
+              <Route path="/projects/success" element={<FundingSuccess />} />
             </Routes>
           </Router>
         </div>

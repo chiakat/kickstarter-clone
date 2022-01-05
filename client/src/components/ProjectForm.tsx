@@ -104,7 +104,7 @@ export default function ProjectForm() {
                     autoFocus
                     onChange={(e) => setTitle(e.target.value)}
                     inputProps={{
-                      maxLength: 100,
+                      maxLength: 80,
                     }}
                   />
                 </Grid>
@@ -119,7 +119,7 @@ export default function ProjectForm() {
                     value={tagline}
                     onChange={(e) => setTagline(e.target.value)}
                     inputProps={{
-                      maxLength: 200,
+                      maxLength: 100,
                     }}
                   />
                 </Grid>
@@ -136,7 +136,7 @@ export default function ProjectForm() {
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
                     inputProps={{
-                      maxLength: 2000,
+                      maxLength: 5000,
                     }}
                   />
                 </Grid>

@@ -48,31 +48,4 @@ module.exports = {
       .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(500).send(err))
   },
-
-
-  // // checks if user exists in table. If not, add new user and return false. If so, return subscribed
-  // postUser: (req, res) => {
-  //   const { user_id } = req.body;
-  //   db.query(selectStatus, [user_id], (statusErr, statusData) => {
-  //     if (statusErr) {
-  //       res.status(500).send(statusErr);
-  //     } else if (!statusData.rows[0].exists) {
-  //       db.query(insertNewUser, Object.values(req.body), (err) => {
-  //         if (err) {
-  //           res.status(500).send(err);
-  //         } else {
-  //           res.status(200).send(false);
-  //         }
-  //       });
-  //     } else {
-  //       db.query(selectSubscribed, [user_id], (subscribedErr, subscribedData) => {
-  //         if (subscribedErr) {
-  //           res.status(500).send(subscribedErr);
-  //         } else {
-  //           res.status(200).send(subscribedData.rows[0].subscribed);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
 };

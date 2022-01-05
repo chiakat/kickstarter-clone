@@ -20,8 +20,8 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS projects CASCADE;
 CREATE TABLE projects (
   id SERIAL NOT NULL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL,
-  tagline VARCHAR(200) NOT NULL,
+  title VARCHAR(80) NOT NULL,
+  tagline VARCHAR(100) NOT NULL,
   details VARCHAR(5000),
   funding_goal REAL NOT NULL,
   funding_received REAL NOT NULL DEFAULT 0,

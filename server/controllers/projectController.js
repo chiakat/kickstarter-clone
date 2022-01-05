@@ -3,7 +3,6 @@ const db = require('../db');
 module.exports = {
   // adds new project
   createProject: (req, res) => {
-    console.log('create', req);
     const createProjectQuery = `INSERT INTO projects
       (title, tagline, details, funding_goal, deadline, img_url, user_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7)`;
@@ -51,7 +50,6 @@ module.exports = {
       const updateProjectQuery = `UPDATE projects
         SET funding_received = $2
         WHERE id = $1`;
-        console.log(req.body)
       db.query(updateProjectQuery, [req.params.id, req.body.newFunding])
         .then(data => res.status(200).send(data.rows[0]))
         .catch(err => res.status(500).send(err))

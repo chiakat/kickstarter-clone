@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import {
   Button, Box, Grid, TextField, Alert, InputAdornment,
 } from '@mui/material';
+import axios from 'axios';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
 
@@ -21,23 +22,30 @@ export default function AddFunding() {
     // fields check
     if (parseInt(funding, 10) <= 0) return setError('Please enter an amount');
 
-    let response;
-    try {
-      if (project) {
-        const newFunding = parseInt(funding, 10) + project.funding_received;
-        response = await ProjectData.patch(`/${project.id}/funding`, {
+    if (project) {
+      const newFunding = parseInt(funding, 10) + project.funding_received;
+
+      const stripeFunding = parseInt(funding, 10) * 100;
+
+      axios.post('http://localhost:3001/create-checkout-session', {
+        name: project.id,
+        unit_amount: stripeFunding,
+      })
+        .then((res) => {
+          console.log(res);
+          window.location.href = res.data.url;
+        })
+        .then(() => ProjectData.patch(`/${project.id}/funding`, {
           newFunding,
+        }))
+        .then(() => {
+          setMessage(`Success! You've contributed ${funding} to ${project.title}. Thank you!`);
+          setFunding('');
+        })
+        .catch((err) => {
+          console.log(err);
+          return setError(`${err}. Please try again.`);
         });
-        return setMessage(`Success! You've contributed ${funding} to ${project.title}. Thank you!`);
-      }
-      if (project && response) {
-      // reset form for added project
-        setMessage(`Success! You've contributed ${funding}. Thank you!`);
-        setFunding('');
-        return null;
-      }
-    } catch (err) {
-      return setError(`${err}. Please try again.`);
     }
     return null;
   };
@@ -83,6 +91,9 @@ export default function AddFunding() {
             </Button>
           </Grid>
         </Box>
+        <form action="localhost:3001/create-checkout-session" method="POST">
+          <button type="submit">Checkout</button>
+        </form>
       </Grid>
     </Grid>
   );
