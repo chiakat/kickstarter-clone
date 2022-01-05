@@ -41,8 +41,6 @@ module.exports = {
       ) = (
         $2, $3, $4, $5, $6, $7, $8, $9)
       WHERE id = $1`;
-      console.log(req.params.id)
-      console.log(Object.values(req.body))
     db.query(updateProjectQuery, [req.params.id, ...Object.values(req.body)])
       .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(500).send(err))
@@ -53,9 +51,8 @@ module.exports = {
       const updateProjectQuery = `UPDATE projects
         SET funding_received = $2
         WHERE id = $1`;
-        console.log(req.params.id)
-        console.log(Object.values(req.body))
-      db.query(updateProjectQuery, [req.params.id], Object.values(req.body))
+        console.log(req.body)
+      db.query(updateProjectQuery, [req.params.id, req.body.newFunding])
         .then(data => res.status(200).send(data.rows[0]))
         .catch(err => res.status(500).send(err))
     },

@@ -22,7 +22,7 @@ CREATE TABLE projects (
   id SERIAL NOT NULL PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
   tagline VARCHAR(200) NOT NULL,
-  details VARCHAR(2000),
+  details VARCHAR(5000),
   funding_goal REAL NOT NULL,
   funding_received REAL NOT NULL DEFAULT 0,
   deadline DATE NOT NULL,

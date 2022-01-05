@@ -29,6 +29,7 @@ const Search = function ({ setSearchInput }: SearchProps) {
   return (
     <Grid
       container
+      item
       md
       component="form"
       sx={{
