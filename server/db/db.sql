@@ -96,14 +96,6 @@ UPDATE users
       'USA')
   WHERE id = 1;
 
--- SELECT * FROM projects
---   LEFT JOIN (
---     SELECT project_id,
---     TRUNC(SUM(funding)) as total_funding
---     FROM users_projects
---     GROUP BY project_id
---   ) users_projects on users_projects.project_id = projects.id;
-
 INSERT INTO projects (
   title,
   tagline,

@@ -24,23 +24,6 @@ const rawTheme = createTheme({
       textTransform: 'none',
     },
   },
-  // components: {
-  //   MuiButton: {
-  //     styleOverrides: {
-  //       outlined: {
-  //         borderColor: grey[400],
-  //         color: grey[700],
-  //         backgroundColor: 'white',
-  //         '&:hover':
-  //           {
-  //             backgroundColor: 'primary',
-  //             borderColor: 'primary',
-  //             color: '#C92C56',
-  //           },
-  //       },
-  //     },
-  //   },
-  // },
 });
 
 const fontHeader = {
