@@ -37,14 +37,6 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
   </tr>
   <tr>
     <td>
-      <img src="images/edit.png" alt="Create or Edit Project Screenshot" width="500">
-    </td>
-    <td>
-      <b>Create / Update Project:</b> Users can create new projects and update existing projects through this form. If accessed via the "Create a project" link, the form will start blank. If accessed via the "Edit" option, the form will be prepopulated with the details of the existing project. The data is stored in a PostGres database and changes will be reflected immediately on the home feed.
-    </td>
-  </tr>
-  <tr>
-    <td>
       <img src="images/projectdetails.png" alt="Project Details Screenshot" width="500">
     </td>
     <td>
@@ -66,6 +58,14 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
     </td>
     <td>
       <b>Manage Projects:</b> A user can view all their projects and edit or delete them from this table. Clicking create a project will redirect them to the new project form.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/edit.png" alt="Create or Edit Project Screenshot" width="500">
+    </td>
+    <td>
+      <b>Create / Update Project:</b> Users can create new projects and update existing projects through this form. If accessed via the "Create a project" link, the form will start blank. If accessed via the "Edit" option, the form will be prepopulated with the details of the existing project. The data is stored in a PostGres database and changes will be reflected immediately on the home feed.
     </td>
   </tr>
 </table>
