@@ -91,9 +91,6 @@ export default function AddFunding() {
             </Button>
           </Grid>
         </Box>
-        <form action="localhost:3001/create-checkout-session" method="POST">
-          <button type="submit">Checkout</button>
-        </form>
       </Grid>
     </Grid>
   );
