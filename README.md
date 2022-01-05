@@ -9,7 +9,7 @@
 # Kickstarter App
 
 **Created By:**
-<a href="https://github.com/chiakat">Katherine Yu</a>,
+<a href="https://github.com/chiakat">Katherine Yu</a>
 
 
 <!-- ABOUT THE PROJECT -->
@@ -80,7 +80,7 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Getting Started (run locally)
+### Getting Started (run locally)
 
 ### Start Back-End Server
 Navigate to server folder
@@ -121,7 +121,7 @@ npm start
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
-## Public View
+### Public View
 Open [https://54.153.4.227](https://54.153.4.227) with your browser to see the site.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
