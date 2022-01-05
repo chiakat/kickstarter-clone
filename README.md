@@ -29,6 +29,7 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
   <tr>
     <td>
       <img src="images/home.png" alt="Home Screenshot" width="500">
+      <img src="images/searchbar.png" alt="Search Results Screenshot" width="500">
     </td>
     <td>
       <b>Home / Project Feed:</b> On the home page, users can browse and search through various projects that have been created. They can click on the Fund button to view more details about the project.
@@ -36,7 +37,7 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
   </tr>
   <tr>
     <td>
-      <img src="images/createproject.png" alt="Create Project Screenshot" width="500">
+      <img src="images/edit.png" alt="Create or Edit Project Screenshot" width="500">
     </td>
     <td>
       <b>Create / Update Project:</b> Users can create new projects and update existing projects through this form. If accessed via the "Create a project" link, the form will start blank. If accessed via the "Edit" option, the form will be prepopulated with the details of the existing project. The data is stored in a PostGres database and changes will be reflected immediately on the home feed.
@@ -52,7 +53,8 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
   </tr>
   <tr>
     <td>
-      <img src="images/funding.png" alt="Funding Page Screenshot" width="500">
+      <img src="images/stripe.png" alt="Stripe Payment Page Screenshot" width="500">
+      <img src="images/success.png" alt="Successful Payment Page Screenshot" width="500">
     </td>
     <td>
       <b>Funding:</b> The Stripe API powers the funding mechanism. Clicking the Fund button will redirect users to the Stripe checkout page where they enter payment details and submit. If the submission is successful, users will be redirected to a "Success" page. If the user cancels, the user will be redirected to the home page. Funding added will be saved to the total in the PostGres Database and reflected on site when the page refreshes.
