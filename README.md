@@ -79,15 +79,16 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
 * [Express.js](https://expressjs.com/)
 * [MUI](https://mui.com/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [FireBase](https://firebase.google.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Getting Started (run locally)
+## Getting Started (run locally)
 
 ### Start Back-End Server
-Navigate to function folder
+Navigate to functions folder
 ```bash
-cd function
+cd functions
 ```
 
 Install dependencies:
@@ -122,12 +123,12 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Deploying the App
+## Deploying the App
 
 ### Start Back-End Server
-Navigate to function folder
+Navigate to functions folder
 ```bash
-cd function
+cd functions
 ```
 
 Install dependencies:
@@ -165,7 +166,7 @@ Run and start the development server:
 firebase deploy
 ```
 
-### Public View
+## Public View
 Open [https://kickstarter-clone-87984.web.app/](https://kickstarter-clone-87984.web.app/) with your browser to see the site.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
