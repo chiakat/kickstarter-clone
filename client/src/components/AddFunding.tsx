@@ -6,6 +6,9 @@ import axios from 'axios';
 import { ProjectsContext } from '../context/ProjectsContext';
 import ProjectData from '../apis/ProjectData';
 
+// const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = 'https://kickstarter-clone-87984.web.app';
+
 export default function AddFunding() {
   const { selectedProject } = useContext(ProjectsContext);
   const project = selectedProject;
@@ -27,7 +30,7 @@ export default function AddFunding() {
 
       const stripeFunding = parseInt(funding, 10) * 100;
 
-      axios.post('http://localhost:3001/create-checkout-session', {
+      axios.post(`${YOUR_DOMAIN}/create-checkout-session`, {
         name: project.id,
         unit_amount: stripeFunding,
       })

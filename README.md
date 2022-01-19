@@ -85,9 +85,9 @@ This project is a kickstarter app that allows entrepreneurs to post product idea
 ### Getting Started (run locally)
 
 ### Start Back-End Server
-Navigate to server folder
+Navigate to function folder
 ```bash
-cd server
+cd function
 ```
 
 Install dependencies:
@@ -122,8 +122,50 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Deploying the App
+
+### Start Back-End Server
+Navigate to function folder
+```bash
+cd function
+```
+
+Install dependencies:
+```bash
+npm install
+```
+
+Run and start the server:
+
+```bash
+firebase deploy
+```
+
+### Start Front-End Client
+Navigate to client folder
+```bash
+cd client
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create production files:
+
+```bash
+npm run build
+```
+
+Run and start the development server:
+
+```bash
+firebase deploy
+```
 
 ### Public View
-Open [https://54.153.4.227](https://54.153.4.227) with your browser to see the site.
+Open [https://kickstarter-clone-87984.web.app/](https://kickstarter-clone-87984.web.app/) with your browser to see the site.
 
 <p align="right">(<a href="#top">back to top</a>)</p>

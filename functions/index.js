@@ -1,4 +1,5 @@
 require("dotenv").config();
+const functions = require("firebase-functions");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -18,7 +19,9 @@ app.use('/api/users', runUsersRte);
 app.use('/api/projects', runProjectsRte);
 
 // Stripe API
-const YOUR_DOMAIN = 'http://localhost:3000';
+// const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = 'https://kickstarter-clone-87984.web.app';
+
 
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
@@ -47,3 +50,5 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
 });
+
+exports.app = functions.https.onRequest(app)
