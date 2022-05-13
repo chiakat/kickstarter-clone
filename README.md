@@ -100,7 +100,7 @@ npm install
 Run and start the server:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ### Start Front-End Client

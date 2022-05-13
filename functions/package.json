@@ -4,7 +4,7 @@
   "description": "Cloud Functions for Firebase",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db": "psql postgres -h 127.0.0.1 -d kickstarter -f db/db.sql",
     "serve": "firebase emulators:start --only functions",
