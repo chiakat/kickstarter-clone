@@ -1,0 +1,37 @@
+{
+  "name": "kickstarter-clone-server",
+  "version": "1.0.0",
+  "description": "Backend node server for Kickstarter",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "psql postgres -h 127.0.0.1 -d kickstarter -f db/db.sql"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiakat/kickstarter-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiakat/kickstarter-clone/issues"
+  },
+  "homepage": "https://github.com/chiakat/kickstarter-clone#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "node-forge": "^1.3.1",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "stripe": "^8.195.0"
+  },
+  "private": true
+}
